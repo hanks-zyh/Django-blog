@@ -19,6 +19,7 @@ def global_setting(request):
 
 def index(request):
     try:
+        # 最新文章数据
         category_list = Category.objects.all()[:5]
         article_list = Article.objects.all()
         paginator = Paginator(article_list, 2)
@@ -27,6 +28,10 @@ def index(request):
             article_list = paginator.page(page)
         except (EmptyPage, InvalidPage, PageNotAnInteger):
             article_list = paginator.page(1)
+
+        # 文章归档
+        # 1. 获取文章月份的归档
+        archive_list = Article.objects.distinct_date()
     except Exception as e:
         logger.error(e)
     return render(request, 'index.html', locals())
