@@ -4156,12 +4156,12 @@ _extend(KUploadButton, {
 		var html = [
 			'<div class="ke-inline-block ' + cls + '">',
 			(options.target ? '' : '<iframe name="' + target + '" style="display:none;"></iframe>'),
-			(options.form ? '<div class="ke-upload-area">' : '<form class="ke-upload-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + url + '">'),
+			(options.form ? '<div class="ke-uploads-area">' : '<form class="ke-uploads-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + url + '">'),
 			'<span class="ke-button-common">',
 			hiddenElements.join(''),
 			'<input type="button" class="ke-button-common ke-button" value="' + title + '" />',
 			'</span>',
-			'<input type="file" class="ke-upload-file" name="' + fieldName + '" tabindex="-1" />',
+			'<input type="file" class="ke-uploads-file" name="' + fieldName + '" tabindex="-1" />',
 			(options.form ? '</div>' : '</form>'),
 			'</div>'].join('');
 		var div = K(html, button.doc);
@@ -4171,9 +4171,9 @@ _extend(KUploadButton, {
 		self.button = button;
 		self.iframe = options.target ? K('iframe[name="' + target + '"]') : K('iframe', div);
 		self.form = options.form ? K(options.form) : K('form', div);
-		self.fileBox = K('.ke-upload-file', div);
+		self.fileBox = K('.ke-uploads-file', div);
 		var width = options.width || K('.ke-button-common', div).width();
-		K('.ke-upload-area', div).width(width);
+		K('.ke-uploads-area', div).width(width);
 		self.options = options;
 	},
 	submit : function() {
@@ -6821,7 +6821,7 @@ KindEditor.plugin('flash', function(K) {
 				'<div class="ke-dialog-row">',
 				'<label for="keUrl" style="width:60px;">' + lang.url + '</label>',
 				'<input class="ke-input-text" type="text" id="keUrl" name="url" value="" style="width:160px;" /> &nbsp;',
-				'<input type="button" class="ke-upload-button" value="' + lang.upload + '" /> &nbsp;',
+				'<input type="button" class="ke-uploads-button" value="' + lang.upload + '" /> &nbsp;',
 				'<span class="ke-button-common ke-button-outer">',
 				'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 				'</span>',
@@ -6884,7 +6884,7 @@ KindEditor.plugin('flash', function(K) {
 
 			if (allowFlashUpload) {
 				var uploadbutton = K.uploadbutton({
-					button : K('.ke-upload-button', div)[0],
+					button : K('.ke-uploads-button', div)[0],
 					fieldName : filePostName,
 					extraParams : extraParams,
 					url : K.addParam(uploadJson, 'dir=flash'),
@@ -6914,7 +6914,7 @@ KindEditor.plugin('flash', function(K) {
 					uploadbutton.submit();
 				});
 			} else {
-				K('.ke-upload-button', div).hide();
+				K('.ke-uploads-button', div).hide();
 			}
 
 			if (allowFileManager) {
@@ -7030,20 +7030,20 @@ KindEditor.plugin('image', function(K) {
 			'</div>',
 			'</div>',
 			//remote image - end
-			//local upload - start
+			//local uploads - start
 			'<div class="tab2" style="display:none;">',
 			'<iframe name="' + target + '" style="display:none;"></iframe>',
-			'<form class="ke-upload-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + K.addParam(uploadJson, 'dir=image') + '">',
+			'<form class="ke-uploads-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + K.addParam(uploadJson, 'dir=image') + '">',
 			//file
 			'<div class="ke-dialog-row">',
 			hiddenElements.join(''),
 			'<label style="width:60px;">' + lang.localUrl + '</label>',
 			'<input type="text" name="localUrl" class="ke-input-text" tabindex="-1" style="width:200px;" readonly="true" /> &nbsp;',
-			'<input type="button" class="ke-upload-button" value="' + lang.upload + '" />',
+			'<input type="button" class="ke-uploads-button" value="' + lang.upload + '" />',
 			'</div>',
 			'</form>',
 			'</div>',
-			//local upload - end
+			//local uploads - end
 			'</div>'
 		].join('');
 		var dialogWidth = showLocal || allowFileManager ? 450 : 400,
@@ -7142,7 +7142,7 @@ KindEditor.plugin('image', function(K) {
 		}
 
 		var uploadbutton = K.uploadbutton({
-			button : K('.ke-upload-button', div)[0],
+			button : K('.ke-uploads-button', div)[0],
 			fieldName : filePostName,
 			form : K('.ke-form', div),
 			target : target,
@@ -7312,7 +7312,7 @@ KindEditor.plugin('insertfile', function(K) {
 			'<div class="ke-dialog-row">',
 			'<label for="keUrl" style="width:60px;">' + lang.url + '</label>',
 			'<input type="text" id="keUrl" name="url" class="ke-input-text" style="width:160px;" /> &nbsp;',
-			'<input type="button" class="ke-upload-button" value="' + lang.upload + '" /> &nbsp;',
+			'<input type="button" class="ke-uploads-button" value="' + lang.upload + '" /> &nbsp;',
 			'<span class="ke-button-common ke-button-outer">',
 			'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 			'</span>',
@@ -7356,7 +7356,7 @@ KindEditor.plugin('insertfile', function(K) {
 
 		if (allowFileUpload) {
 			var uploadbutton = K.uploadbutton({
-				button : K('.ke-upload-button', div)[0],
+				button : K('.ke-uploads-button', div)[0],
 				fieldName : filePostName,
 				url : K.addParam(uploadJson, 'dir=file'),
 				extraParams : extraParams,
@@ -7386,7 +7386,7 @@ KindEditor.plugin('insertfile', function(K) {
 				uploadbutton.submit();
 			});
 		} else {
-			K('.ke-upload-button', div).hide();
+			K('.ke-uploads-button', div).hide();
 		}
 		if (allowFileManager) {
 			viewServerBtn.click(function(e) {
@@ -7689,7 +7689,7 @@ KindEditor.plugin('media', function(K) {
 				'<div class="ke-dialog-row">',
 				'<label for="keUrl" style="width:60px;">' + lang.url + '</label>',
 				'<input class="ke-input-text" type="text" id="keUrl" name="url" value="" style="width:160px;" /> &nbsp;',
-				'<input type="button" class="ke-upload-button" value="' + lang.upload + '" /> &nbsp;',
+				'<input type="button" class="ke-uploads-button" value="' + lang.upload + '" /> &nbsp;',
 				'<span class="ke-button-common ke-button-outer">',
 				'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 				'</span>',
@@ -7760,7 +7760,7 @@ KindEditor.plugin('media', function(K) {
 
 			if (allowMediaUpload) {
 				var uploadbutton = K.uploadbutton({
-					button : K('.ke-upload-button', div)[0],
+					button : K('.ke-uploads-button', div)[0],
 					fieldName : filePostName,
 					extraParams : extraParams,
 					url : K.addParam(uploadJson, 'dir=media'),
@@ -7790,7 +7790,7 @@ KindEditor.plugin('media', function(K) {
 					uploadbutton.submit();
 				});
 			} else {
-				K('.ke-upload-button', div).hide();
+				K('.ke-uploads-button', div).hide();
 			}
 
 			if (allowFileManager) {
@@ -8133,7 +8133,7 @@ KindEditor.plugin('multiimage', function(K) {
 /**
  * SWFUpload: http://www.swfupload.org, http://swfupload.googlecode.com
  *
- * mmSWFUpload 1.0: Flash upload dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
+ * mmSWFUpload 1.0: Flash uploads dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
  *
  * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilz閚 and Mammon Media and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
@@ -8637,7 +8637,7 @@ SWFUpload.prototype.cancelUpload = function (fileID, triggerErrorEvent) {
 	this.callFlash("CancelUpload", [fileID, triggerErrorEvent]);
 };
 
-// Public: stopUpload stops the current upload and requeues the file at the beginning of the queue.
+// Public: stopUpload stops the current uploads and requeues the file at the beginning of the queue.
 // If nothing is currently uploading then nothing happens.
 SWFUpload.prototype.stopUpload = function () {
 	this.callFlash("StopUpload");
@@ -8659,7 +8659,7 @@ SWFUpload.prototype.getStats = function () {
 // Public: setStats changes the SWFUpload statistics.  You shouldn't need to
 // change the statistics but you can.  Changing the statistics does not
 // affect SWFUpload accept for the successful_uploads count which is used
-// by the upload_limit setting to determine how many files the user may upload.
+// by the upload_limit setting to determine how many files the user may uploads.
 SWFUpload.prototype.setStats = function (statsObject) {
 	this.callFlash("SetStats", [statsObject]);
 };
@@ -9125,8 +9125,8 @@ SWFUpload.Console.writeLine = function (message) {
 	Features:
 		*Adds a cancelQueue() method for cancelling the entire queue.
 		*All queued files are uploaded when startUpload() is called.
-		*If false is returned from uploadComplete then the queue upload is stopped.
-		 If false is not returned (strict comparison) then the queue upload is continued.
+		*If false is returned from uploadComplete then the queue uploads is stopped.
+		 If false is not returned (strict comparison) then the queue uploads is continued.
 		*Adds a QueueComplete event that is fired when all the queued files have finished uploading.
 		 Set the event handler with the queue_complete_handler setting.
 
@@ -9177,7 +9177,7 @@ if (typeof(SWFUpload) === "function") {
 			returnValue = this.queueSettings.user_upload_start_handler.call(this, file);
 		}
 
-		// To prevent upload a real "FALSE" value must be returned, otherwise default to a real "TRUE" value.
+		// To prevent uploads a real "FALSE" value must be returned, otherwise default to a real "TRUE" value.
 		returnValue = (returnValue === false) ? false : true;
 
 		this.queueSettings.queue_cancelled_flag = !returnValue;
@@ -9196,7 +9196,7 @@ if (typeof(SWFUpload) === "function") {
 		if (typeof(user_upload_complete_handler) === "function") {
 			continueUpload = (user_upload_complete_handler.call(this, file) === false) ? false : true;
 		} else if (file.filestatus === SWFUpload.FILE_STATUS.QUEUED) {
-			// If the file was stopped and re-queued don't restart the upload
+			// If the file was stopped and re-queued don't restart the uploads
 			continueUpload = false;
 		} else {
 			continueUpload = true;

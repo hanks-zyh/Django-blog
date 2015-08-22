@@ -23,7 +23,7 @@ KindEditor.plugin('flash', function(K) {
 				'<div class="ke-dialog-row">',
 				'<label for="keUrl" style="width:60px;">' + lang.url + '</label>',
 				'<input class="ke-input-text" type="text" id="keUrl" name="url" value="" style="width:160px;" /> &nbsp;',
-				'<input type="button" class="ke-upload-button" value="' + lang.upload + '" /> &nbsp;',
+				'<input type="button" class="ke-uploads-button" value="' + lang.upload + '" /> &nbsp;',
 				'<span class="ke-button-common ke-button-outer">',
 				'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 				'</span>',
@@ -86,7 +86,7 @@ KindEditor.plugin('flash', function(K) {
 
 			if (allowFlashUpload) {
 				var uploadbutton = K.uploadbutton({
-					button : K('.ke-upload-button', div)[0],
+					button : K('.ke-uploads-button', div)[0],
 					fieldName : filePostName,
 					extraParams : extraParams,
 					url : K.addParam(uploadJson, 'dir=flash'),
@@ -116,7 +116,7 @@ KindEditor.plugin('flash', function(K) {
 					uploadbutton.submit();
 				});
 			} else {
-				K('.ke-upload-button', div).hide();
+				K('.ke-uploads-button', div).hide();
 			}
 
 			if (allowFileManager) {

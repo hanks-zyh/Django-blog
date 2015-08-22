@@ -297,7 +297,7 @@ KindEditor.plugin('multiimage', function(K) {
 /**
  * SWFUpload: http://www.swfupload.org, http://swfupload.googlecode.com
  *
- * mmSWFUpload 1.0: Flash upload dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
+ * mmSWFUpload 1.0: Flash uploads dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
  *
  * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilz閚 and Mammon Media and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
@@ -801,7 +801,7 @@ SWFUpload.prototype.cancelUpload = function (fileID, triggerErrorEvent) {
 	this.callFlash("CancelUpload", [fileID, triggerErrorEvent]);
 };
 
-// Public: stopUpload stops the current upload and requeues the file at the beginning of the queue.
+// Public: stopUpload stops the current uploads and requeues the file at the beginning of the queue.
 // If nothing is currently uploading then nothing happens.
 SWFUpload.prototype.stopUpload = function () {
 	this.callFlash("StopUpload");
@@ -823,7 +823,7 @@ SWFUpload.prototype.getStats = function () {
 // Public: setStats changes the SWFUpload statistics.  You shouldn't need to
 // change the statistics but you can.  Changing the statistics does not
 // affect SWFUpload accept for the successful_uploads count which is used
-// by the upload_limit setting to determine how many files the user may upload.
+// by the upload_limit setting to determine how many files the user may uploads.
 SWFUpload.prototype.setStats = function (statsObject) {
 	this.callFlash("SetStats", [statsObject]);
 };
@@ -1289,8 +1289,8 @@ SWFUpload.Console.writeLine = function (message) {
 	Features:
 		*Adds a cancelQueue() method for cancelling the entire queue.
 		*All queued files are uploaded when startUpload() is called.
-		*If false is returned from uploadComplete then the queue upload is stopped.
-		 If false is not returned (strict comparison) then the queue upload is continued.
+		*If false is returned from uploadComplete then the queue uploads is stopped.
+		 If false is not returned (strict comparison) then the queue uploads is continued.
 		*Adds a QueueComplete event that is fired when all the queued files have finished uploading.
 		 Set the event handler with the queue_complete_handler setting.
 
@@ -1341,7 +1341,7 @@ if (typeof(SWFUpload) === "function") {
 			returnValue = this.queueSettings.user_upload_start_handler.call(this, file);
 		}
 
-		// To prevent upload a real "FALSE" value must be returned, otherwise default to a real "TRUE" value.
+		// To prevent uploads a real "FALSE" value must be returned, otherwise default to a real "TRUE" value.
 		returnValue = (returnValue === false) ? false : true;
 
 		this.queueSettings.queue_cancelled_flag = !returnValue;
@@ -1360,7 +1360,7 @@ if (typeof(SWFUpload) === "function") {
 		if (typeof(user_upload_complete_handler) === "function") {
 			continueUpload = (user_upload_complete_handler.call(this, file) === false) ? false : true;
 		} else if (file.filestatus === SWFUpload.FILE_STATUS.QUEUED) {
-			// If the file was stopped and re-queued don't restart the upload
+			// If the file was stopped and re-queued don't restart the uploads
 			continueUpload = false;
 		} else {
 			continueUpload = true;

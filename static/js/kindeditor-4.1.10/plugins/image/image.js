@@ -71,20 +71,20 @@ KindEditor.plugin('image', function(K) {
 			'</div>',
 			'</div>',
 			//remote image - end
-			//local upload - start
+			//local uploads - start
 			'<div class="tab2" style="display:none;">',
 			'<iframe name="' + target + '" style="display:none;"></iframe>',
-			'<form class="ke-upload-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + K.addParam(uploadJson, 'dir=image') + '">',
+			'<form class="ke-uploads-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + K.addParam(uploadJson, 'dir=image') + '">',
 			//file
 			'<div class="ke-dialog-row">',
 			hiddenElements.join(''),
 			'<label style="width:60px;">' + lang.localUrl + '</label>',
 			'<input type="text" name="localUrl" class="ke-input-text" tabindex="-1" style="width:200px;" readonly="true" /> &nbsp;',
-			'<input type="button" class="ke-upload-button" value="' + lang.upload + '" />',
+			'<input type="button" class="ke-uploads-button" value="' + lang.upload + '" />',
 			'</div>',
 			'</form>',
 			'</div>',
-			//local upload - end
+			//local uploads - end
 			'</div>'
 		].join('');
 		var dialogWidth = showLocal || allowFileManager ? 450 : 400,
@@ -183,7 +183,7 @@ KindEditor.plugin('image', function(K) {
 		}
 
 		var uploadbutton = K.uploadbutton({
-			button : K('.ke-upload-button', div)[0],
+			button : K('.ke-uploads-button', div)[0],
 			fieldName : filePostName,
 			form : K('.ke-form', div),
 			target : target,
