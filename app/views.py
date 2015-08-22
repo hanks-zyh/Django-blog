@@ -35,3 +35,24 @@ def index(request):
     except Exception as e:
         logger.error(e)
     return render(request, 'index.html', locals())
+
+def archive(request):
+    try:
+        # 最新文章数据
+        category_list = Category.objects.all()[:5]
+        year = request.GET.get('year', None)
+        mouth = request.GET.get('mouth', None)
+        article_list = Article.objects.filter(date_publish__icontains=year+'-'+mouth)
+        paginator = Paginator(article_list, 2)
+        try:
+            page = int(request.GET.get('page', 1 ))
+            article_list = paginator.page(page)
+        except (EmptyPage, InvalidPage, PageNotAnInteger):
+            article_list = paginator.page(1)
+
+        # 文章归档
+        # 1. 获取文章月份的归档
+        archive_list = Article.objects.distinct_date()
+    except Exception, e:
+        logger.error(e)
+    return render(request, 'archive.html', locals())
