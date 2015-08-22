@@ -14,6 +14,8 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('click_count', 'is_recommend', 'tag', 'category', 'user')
         }),
     )
+    list_display = ('title', 'desc', 'click_count',)
+    list_editable = ('click_count',)
 
     class Media:
         js = (
