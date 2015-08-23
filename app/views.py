@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.db.models import Count
 import logging
-from models import Category, Article,Comment
+from models import Category, Article, Comment, Tag
 
 logger = logging.getLogger('blog.views')
 
@@ -37,6 +37,9 @@ def global_setting(request):
     # 站长推荐
     article_recomment_list = Article.objects.filter(is_recommend=True)[:6]
 
+    #标签云数据
+    tag_list = Tag.objects.all()
+
     return locals()
 
 
@@ -58,6 +61,16 @@ def archive(request):
         logger.error(e)
     return render(request, 'archive.html', locals())
 
+def tag(request):
+    try:
+        tag_name = request.GET.get('tag',None)
+        article_list = Article.objects.filter(tag__name=tag_name)
+        article_list = getPage(request, article_list)
+    except Exception, e:
+        logger.error(e)
+    return render(request, 'tag.html', locals())
+
+
 def getPage(request, article_list):
     paginator = Paginator(article_list, 2)
     try:
@@ -66,3 +79,5 @@ def getPage(request, article_list):
     except (EmptyPage, InvalidPage, PageNotAnInteger):
         article_list = paginator.page(1)
     return article_list
+
+
