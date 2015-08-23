@@ -33,7 +33,9 @@ def global_setting(request):
     article_comment_list = [Article.objects.get(pk=comment['article']) for comment in comment_count_list]
     
     # 浏览排行
-    article_click_list = Article.objects.order_by('-click_count')
+    article_click_list = Article.objects.order_by('-click_count')[:6]
+    # 站长推荐
+    article_recomment_list = Article.objects.filter(is_recommend=True)[:6]
 
     return locals()
 
