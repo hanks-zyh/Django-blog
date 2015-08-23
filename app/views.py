@@ -72,6 +72,18 @@ def tag(request):
         logger.error(e)
     return render(request, 'tag.html', locals())
 
+def article(request):
+    try:
+        #获取文章id
+        article_id = request.GET.get('id', None)
+        try :
+            article = Article.objects.get(pk=article_id)
+        except Article.DoesNotExist:
+            return render(request, 'failure.html', {'resion':'没有找到对应文章'})
+    except Exception, e:
+       logger.error(e)
+    return render(request, 'article.html', locals())
+
 
 def getPage(request, article_list):
     paginator = Paginator(article_list, 2)
