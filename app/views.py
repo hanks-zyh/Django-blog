@@ -18,6 +18,9 @@ def global_setting(request):
     # 导航栏分类数据
     category_list = Category.objects.all()[:5]
   
+    # 推荐文章
+    # 广告数据
+    # Tag数据
 
     # 文章归档
     # 1. 获取文章月份的归档
