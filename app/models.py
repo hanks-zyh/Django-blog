@@ -9,7 +9,7 @@ class User(AbstractUser):
                                null=True, verbose_name='用户头像')
     qq = models.CharField(max_length=20, blank=True, null=True, verbose_name='QQ号码')
     mobile = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name='手机号码')
-
+    
     class Meta:
         verbose_name = '用户'
         verbose_name_plural = verbose_name
