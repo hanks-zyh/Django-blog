@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.db.models import Count
 import logging
-from models import Category, Article, Comment, Tag
+from models import Category, Article, Comment, Tag, Links
 
 logger = logging.getLogger('blog.views')
 
@@ -37,9 +37,11 @@ def global_setting(request):
     # 站长推荐
     article_recomment_list = Article.objects.filter(is_recommend=True)[:6]
 
-    #标签云数据
-    tag_list = Tag.objects.all()
+    # 标签云数据
+    tag_list = Tag.objects.all()[:30]
 
+    # 友情链接
+    link_list = Links.objects.all()[:5]
     return locals()
 
 
