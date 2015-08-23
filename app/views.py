@@ -3,8 +3,9 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from django.shortcuts import render
 from django.conf import settings
+from django.db.models import Count
 import logging
-from models import Category, Article
+from models import Category, Article,Comment
 
 logger = logging.getLogger('blog.views')
 
@@ -18,13 +19,22 @@ def global_setting(request):
     # 导航栏分类数据
     category_list = Category.objects.all()[:5]
   
-    # 推荐文章
+
+
     # 广告数据
     # Tag数据
 
     # 文章归档
     # 1. 获取文章月份的归档
     archive_list = Article.objects.distinct_date()
+
+    # 评论排行
+    comment_count_list = Comment.objects.values('article').annotate(comment_count=Count('article')).order_by('-comment_count')[:6]
+    article_comment_list = [Article.objects.get(pk=comment['article']) for comment in comment_count_list]
+    
+    # 浏览排行
+    article_click_list = Article.objects.order_by('-click_count')
+
     return locals()
 
 
