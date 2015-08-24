@@ -74,23 +74,23 @@
             <div class="ms-main" id="ms-main">
                 <div style="display: block;" class="bd bd-news">
                     <ul>
-                    {% for article in article_click_list %}
-                        <li><a href="/" target="_blank">{{ article.title | slice:':25' }}</a></li>
-                    {% endfor %}
-                    </ul>
-                </div>
-                <div class="bd bd-news">
-                    <ul>
-                        {% for article in article_comment_list %}
-                        <li><a href="/" target="_blank">{{article.title | slice:':25'}}</a></li>
+                        {% for article in article_click_list %}
+                            <li><a href="/" target="_blank">{{ article.title | slice:':25' }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="bd bd-news">
                     <ul>
-                    {% for article in article_recomment_list %}
-                        <li><a href="/" target="_blank">{{article.title| slice:':25'}}</a></li>
-                    {% endfor %} 
+                        {% for article in article_comment_list %}
+                            <li><a href="/" target="_blank">{{ article.title | slice:':25' }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="bd bd-news">
+                    <ul>
+                        {% for article in article_recomment_list %}
+                            <li><a href="/" target="_blank">{{ article.title| slice:':25' }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -101,26 +101,28 @@
         <div class="cloud">
             <h3>标签云</h3>
             <ul>
-            {% for tag in tag_list %}
-                <li><a href='{% url 'tag' %}?tag={{tag.name}}'>{{tag.name}}</a></li>
-            {% endfor %}
+                {% for tag in tag_list %}
+                    <li><a href='{% url 'tag' %}?tag={{ tag.name }}'>{{ tag.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
         <div class="tuwen">
             <h3>文章归档</h3>
             <ul>
                 {% for archive in archive_list %}
-                <li><p><span class="tutime font-size-18"><a href='{% url 'archive' %}?year={{ archive | slice:":4" }}&mouth={{ archive | slice:"5:7" }}'>{{ archive }}</a></span></p>
-                </li>
-                 {% endfor %}
+                    <li><p><span class="tutime font-size-18"><a
+                            href='{% url 'archive' %}?year={{ archive | slice:":4" }}&mouth={{ archive | slice:"5:7" }}'>{{ archive }}</a></span>
+                    </p>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="links">
             <h3>友情链接</h3>
             <ul>
-            {% for link in link_list %}
-                <li><a href="{{ link.callback_url }}">{{ link.title }}</a></li>
-            {% endfor %}
+                {% for link in link_list %}
+                    <li><a href="{{ link.callback_url }}">{{ link.title }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

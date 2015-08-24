@@ -1,11 +1,13 @@
 # -*- coding:utf-8 -*-
+from django.contrib.auth import login, authenticate, logout
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.db.models import Count
 import logging
-from models import Category, Article, Comment, Tag, Links
+from models import Category, Article, Comment, Tag, Links, User
+from forms import CommentForm, LoginForm, RegForm
 
 logger = logging.getLogger('blog.views')
 
@@ -85,10 +87,10 @@ def article(request):
         except Article.DoesNotExist:
             return render(request, 'failure.html', {'resion': '没有找到对应文章'})
         # 评论表单
-        # comment_form = CommentForm({'author': request.user.username,
-        #                             'email': request.user.email,
-        #                             'url': request.user.url,
-        #                             'article': id} if request.user.is_authenticated() else{'article': id})
+        comment_form = CommentForm({'author': request.user.username,
+                                    'email': request.user.email,
+                                    'url': request.user.url,
+                                    'article': id} if request.user.is_authenticated() else{'article': id})
         # 获取评论列表
         comments = Comment.objects.filter(article=article).order_by('id')
         comment_list = []
@@ -110,21 +112,25 @@ def article(request):
 # 提交评论
 def comment_post(request):
     try:
+        print  '.......................11'
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
+            print  '.......................22'+comment_form.cleaned_data["author"]
+            print  '.......................22'+comment_form.cleaned_data["email"]
+            print  '.......................22'+comment_form.cleaned_data["url"]
+            print  '.......................22'+comment_form.cleaned_data["comment"]
+            print  '.......................22'+comment_form.cleaned_data["article"]
             # 获取表单信息
-            comment = Comment.objects.create(username=comment_form.cleaned_data["author"],
-                                             email=comment_form.cleaned_data[
-                                                 "email"],
-                                             url=comment_form.cleaned_data[
-                                                 "url"],
-                                             content=comment_form.cleaned_data[
-                                                 "comment"],
-                                             article_id=comment_form.cleaned_data[
-                                                 "article"],
-                                             user=request.user if request.user.is_authenticated() else None)
+            comment = Comment(username=comment_form.cleaned_data["author"],
+                              email=comment_form.cleaned_data["email"],
+                              url=comment_form.cleaned_data["url"],
+                              content=comment_form.cleaned_data["comment"],
+                              article_id=comment_form.cleaned_data["article"],
+                              user=request.user if request.user.is_authenticated() else None)
+            print  '.......................33'
             comment.save()
         else:
+            print  '.......................44'
             return render(request, 'failure.html', {'reason': comment_form.errors})
     except Exception as e:
         logger.error(e)
@@ -150,20 +156,20 @@ def do_logout(request):
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
 
+
 # 注册
-
-
 def do_reg(request):
     try:
         if request.method == 'POST':
             reg_form = RegForm(request.POST)
             if reg_form.is_valid():
                 # 注册
+                from django.contrib.auth.hashers import make_password
                 user = User.objects.create(username=reg_form.cleaned_data["username"],
                                            email=reg_form.cleaned_data[
                                                "email"],
                                            url=reg_form.cleaned_data["url"],
-                                           password=make_password(reg_form.cleaned_data["password"]),)
+                                           password=make_password(reg_form.cleaned_data["password"]), )
                 user.save()
 
                 # 登录
@@ -178,6 +184,7 @@ def do_reg(request):
     except Exception as e:
         logger.error(e)
     return render(request, 'reg.html', locals())
+
 
 # 登录
 
