@@ -23,7 +23,6 @@ def global_setting(request):
     category_list = Category.objects.all()[:5]
 
     # 广告数据
-    # Tag数据
 
     # 文章归档
     # 1. 获取文章月份的归档
@@ -133,7 +132,7 @@ def comment_post(request):
 
 
 def getPage(request, article_list):
-    paginator = Paginator(article_list, 2)
+    paginator = Paginator(article_list, 5)
     try:
         page = int(request.GET.get('page', 1))
         article_list = paginator.page(page)

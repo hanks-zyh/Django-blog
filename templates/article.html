@@ -53,7 +53,7 @@
         </span>
                     </div>
                     <div>
-                        <img alt='' src='{{ comment.user.avatar }}' class='avatar avatar-32 photo' height='32' width='32'/>
+                        <img alt='' src='{% static '/uploads/' %}{{ comment.user.avatar }}' class='avatar avatar-32 photo' height='32' width='32'/>
                     </div>
                     <div class="body">
                         <p>{{ comment.content }}</p>
