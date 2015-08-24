@@ -121,6 +121,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 AUTH_USER_MODEL = 'app.User'
 
 # 网址基本信息配置
+SITE_URL = 'http://127.0.0.1:8000'
 SITE_NAME = '张玉涵的个人博客'
 SITE_DESC = '全栈工程师养成日记,欢迎大家来互相交流学习!梦虽虚幻,却是自己的梦想；位虽低微,却是自己的岗位；屋虽简陋,却是自己的家；志虽渺小,却是自己的追求。'
 

@@ -28,7 +28,7 @@
         <div class="info">
             Address:
             <a href="{% url 'article' %}?id={{ article.id }}" rel="bookmark"
-               title="{{ article.title }}">127.0.0.1:8000{% url 'article' %}?id={{ article.id }}</a>
+               title="{{ article.title }}">{{ SITE_URL }}article/?id={{ article.id }}</a>
         </div>
         <div class="commentstitle">
     <span class="trackback">
@@ -44,7 +44,8 @@
             {% for comment in comment_list %}
                 <li class="alt" id="comment-59418">
                     <div class="top">
-                        <a href='http://www.yopoing.com' rel='external nofollow'
+                        <a href='{% if comment.user.url %} {{ comment.user.url }} {% else %} {{ SITE_URL }} {% endif %}'
+                           rel='external nofollow'
                            class='url'>{{ comment.user.username }}</a>
         <span class="time">
           @
@@ -52,7 +53,7 @@
         </span>
                     </div>
                     <div>
-                        <img alt='' src='images/default.jpg' class='avatar avatar-32 photo' height='32' width='32'/>
+                        <img alt='' src='{{ comment.user.avatar }}' class='avatar avatar-32 photo' height='32' width='32'/>
                     </div>
                     <div class="body">
                         <p>{{ comment.content }}</p>
@@ -90,14 +91,16 @@
                 <div class='login_info'><b>{{ request.user.username }}</b>,快来写点评论吧!&nbsp;<a
                         href="{% url 'logout' %}">注销</a></div>
             {% endif %}
-            <form action="{% url 'comment_post' %}" method="post" >
+            <form action="{% url 'comment_post' %}" method="post">
                 {% csrf_token %}
                 <p>{{ comment_form.author }}
                     <label for="author">Name (required)</label>
                 </p>
+
                 <p>{{ comment_form.email }}
                     <label for="email">Email (Will NOT be published) (required)</label>
                 </p>
+
                 <p>{{ comment_form.url }}
                     <label for="url">URL</label>
                 </p>
@@ -108,6 +111,7 @@
               </p>
               -->
                 <p>{{ comment_form.comment }}</p>
+
                 <p>
                     {{ comment_form.article }}
                     <input name="submit" type="submit" id="submit" tabindex="5" value="Submit" class="button"/>

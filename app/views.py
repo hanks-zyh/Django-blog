@@ -15,6 +15,7 @@ logger = logging.getLogger('blog.views')
 # Create your views here.
 def global_setting(request):
     # 网站基本信息
+    SITE_URL = settings.SITE_URL
     SITE_NAME = settings.SITE_NAME
     SITE_DESC = settings.SITE_DESC
 
@@ -192,7 +193,6 @@ def do_login(request):
                 if user is not None:
                     # 指定默认的登录验证方式
                     user.backend = 'django.contrib.auth.backends.ModelBackend'
-                    print  '55555555555'
                     login(request, user)
                 else:
                     return render(request, 'failure.html', {'reason': '登录验证失败'})
