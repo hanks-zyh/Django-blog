@@ -90,7 +90,8 @@ def article(request):
         comment_form = CommentForm({'author': request.user.username,
                                     'email': request.user.email,
                                     'url': request.user.url,
-                                    'article': id} if request.user.is_authenticated() else{'article': id})
+                                    'article': article_id} if request.user.is_authenticated() else{
+            'article': article_id})
         # 获取评论列表
         comments = Comment.objects.filter(article=article).order_by('id')
         comment_list = []
@@ -112,27 +113,20 @@ def article(request):
 # 提交评论
 def comment_post(request):
     try:
-        print  '.......................11'
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            print  '.......................22'+comment_form.cleaned_data["author"]
-            print  '.......................22'+comment_form.cleaned_data["email"]
-            print  '.......................22'+comment_form.cleaned_data["url"]
-            print  '.......................22'+comment_form.cleaned_data["comment"]
-            print  '.......................22'+comment_form.cleaned_data["article"]
             # 获取表单信息
             comment = Comment(username=comment_form.cleaned_data["author"],
                               email=comment_form.cleaned_data["email"],
-                              url=comment_form.cleaned_data["url"],
+                              url='http://csdi.com',
                               content=comment_form.cleaned_data["comment"],
                               article_id=comment_form.cleaned_data["article"],
                               user=request.user if request.user.is_authenticated() else None)
-            print  '.......................33'
             comment.save()
         else:
-            print  '.......................44'
             return render(request, 'failure.html', {'reason': comment_form.errors})
     except Exception as e:
+        print  e
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
 
