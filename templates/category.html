@@ -1,0 +1,8 @@
+<nav id="topnav" class="f_r">
+    <ul>
+        {% for category in category_list %}
+            <a href="/?cid={{ category.id }}" target="_blank">{{ category.name }}</a>
+        {% endfor %}
+    </ul>
+    <script src="static/js/nav.js"></script>
+</nav>

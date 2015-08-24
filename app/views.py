@@ -160,8 +160,7 @@ def do_reg(request):
                 # 注册
                 from django.contrib.auth.hashers import make_password
                 user = User.objects.create(username=reg_form.cleaned_data["username"],
-                                           email=reg_form.cleaned_data[
-                                               "email"],
+                                           email=reg_form.cleaned_data["email"],
                                            url=reg_form.cleaned_data["url"],
                                            password=make_password(reg_form.cleaned_data["password"]), )
                 user.save()
@@ -181,8 +180,6 @@ def do_reg(request):
 
 
 # 登录
-
-
 def do_login(request):
     try:
         if request.method == 'POST':
@@ -195,6 +192,7 @@ def do_login(request):
                 if user is not None:
                     # 指定默认的登录验证方式
                     user.backend = 'django.contrib.auth.backends.ModelBackend'
+                    print  '55555555555'
                     login(request, user)
                 else:
                     return render(request, 'failure.html', {'reason': '登录验证失败'})
@@ -204,6 +202,7 @@ def do_login(request):
         else:
             login_form = LoginForm()
     except Exception as e:
+        print  e
         logger.error(e)
     return render(request, 'login.html', locals())
 

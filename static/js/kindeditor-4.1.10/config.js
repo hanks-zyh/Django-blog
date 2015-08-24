@@ -1,10 +1,7 @@
-/**
- * Created by Administrator on 2015/8/22.
- */
 KindEditor.ready(function(K) {
-	K.create('textarea[name="content"]', {
-		width : "1000px",
-    	        height : "400px",
-		uploadJson: '/admin/uploads/kindeditor',
-	});
-});
+                K.create('textarea[name=content]',{
+                    width:'800px',
+                    height:'200px',
+                    uploadJson: '/admin/upload/kindeditor',
+                });
+        });

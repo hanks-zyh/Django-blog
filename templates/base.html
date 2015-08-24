@@ -21,14 +21,7 @@
 
         <p>{{ SITE_DESC }}</p>
     </div>
-    <nav id="topnav" class="f_r">
-        <ul>
-            {% for category in category_list %}
-                <a href="index.html" target="_blank">{{ category.name }}</a>
-            {% endfor %}
-        </ul>
-        <script src="js/nav.js"></script>
-    </nav>
+    {% include 'category.html' %}
 </header>
 <article>
     <div class="l_box f_l">

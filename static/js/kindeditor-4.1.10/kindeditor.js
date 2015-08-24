@@ -4156,12 +4156,12 @@ _extend(KUploadButton, {
 		var html = [
 			'<div class="ke-inline-block ' + cls + '">',
 			(options.target ? '' : '<iframe name="' + target + '" style="display:none;"></iframe>'),
-			(options.form ? '<div class="ke-uploads-area">' : '<form class="ke-uploads-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + url + '">'),
+			(options.form ? '<div class="ke-upload-area">' : '<form class="ke-upload-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + url + '">'),
 			'<span class="ke-button-common">',
 			hiddenElements.join(''),
 			'<input type="button" class="ke-button-common ke-button" value="' + title + '" />',
 			'</span>',
-			'<input type="file" class="ke-uploads-file" name="' + fieldName + '" tabindex="-1" />',
+			'<input type="file" class="ke-upload-file" name="' + fieldName + '" tabindex="-1" />',
 			(options.form ? '</div>' : '</form>'),
 			'</div>'].join('');
 		var div = K(html, button.doc);
@@ -4171,9 +4171,9 @@ _extend(KUploadButton, {
 		self.button = button;
 		self.iframe = options.target ? K('iframe[name="' + target + '"]') : K('iframe', div);
 		self.form = options.form ? K(options.form) : K('form', div);
-		self.fileBox = K('.ke-uploads-file', div);
+		self.fileBox = K('.ke-upload-file', div);
 		var width = options.width || K('.ke-button-common', div).width();
-		K('.ke-uploads-area', div).width(width);
+		K('.ke-upload-area', div).width(width);
 		self.options = options;
 	},
 	submit : function() {
